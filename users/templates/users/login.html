@@ -1,0 +1,20 @@
+{% extends "tv/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div style="background-color:#14181c" class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4" style="color:white">Login</legend>
+            <div style="color:#9ab">{{ form|crispy }}</div>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Login</button>
+        </div>
+    </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Need an account? <a class="ml-2" href="/register/">Register now!</a> </small>
+        </div>
+    </div>
+{% endblock content %}

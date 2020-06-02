@@ -18,7 +18,7 @@
         <title>TrackTV - ok</title>
     {% endif %}
 </head>
-<body style="background-color:#14181c;">
+<body style="background-color:#14181c">
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
@@ -33,8 +33,13 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="#">Login</a>
-              <a class="nav-item nav-link" href="#">Register</a>
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="/profile/">My Profile</a>
+                    <a class="nav-item nav-link" href="/logout/">Logout</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="/login/">Login</a>
+                    <a class="nav-item nav-link" href="/register/">Register</a>
+                {% endif %}
             </div>
           </div>
         </div>
@@ -43,6 +48,13 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
           {% block content %}{% endblock %}
         </div>
       </div>

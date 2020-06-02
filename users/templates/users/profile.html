@@ -1,0 +1,9 @@
+{% extends "tv/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if user %}
+        <h5 style="font-size:30px; color:#ffffff"> ok {{ user }}</h5>
+    {% else %}
+        <h5 style="font-size:30px; color:#ffffff">No account with that username exists!</h5>
+    {% endif %}
+{% endblock content %}
