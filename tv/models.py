@@ -6,11 +6,14 @@ from django.contrib.auth.models import User
 
 class Show(models.Model):
     showid = models.IntegerField()
-    plot = models.TextField()
+    image = models.TextField(default='')
+    genres = models.TextField(default='')
     status = models.CharField(max_length=32)
+    name = models.TextField(default='')
 
 
 class UserRating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     show = models.ForeignKey(Show, on_delete=models.CASCADE)
     rating = models.IntegerField()
+    position = models.IntegerField(default=0)

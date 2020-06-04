@@ -1,0 +1,187 @@
+{% extends "tv/base.html" %}
+{% block content %}
+<pre></pre><pre></pre><pre></pre>
+<style>
+#hidden {
+display: none
+}
+.checked {
+  color: orange;
+}
+</style>
+<article>
+<h1 style="color:white; padding:0px 15px">
+
+    <b>{{show.name}}</b>
+            <button style="color:white; background-color:blue; border: none; font-size:12px;">{{show.status}}</button>
+            {% if watched %}
+            <button style="color:white; background-color:green; border: none; font-size:12px;">Watched</button>
+            {% endif %}
+    {% if user.is_authenticated %}
+    {% if watched %}
+    {% if position %}
+        <button type="button" class="btn btn-info">Top {{position}}</button>
+        <form style="display: inline-block" id = "nnrating0" method="post" name="nrating0">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="0">
+        <button type="button" class="btn btn-danger" onclick="document.forms['nrating0'].submit();">Remove</button>
+    </form>
+    {% else %}
+    <button onclick="show()" class="btn btn-secondary">Add to Top 5</button>
+    <form style="display: inline-block" id = "nrating0" method="post" name="rating0">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="0">
+        <button type="button" class="btn btn-danger" onclick="document.forms['rating0'].submit();">Remove</button>
+    </form>
+    <div id="hidden">
+        <form method="post">
+        {% csrf_token %}
+            <input type="number" name="#" class="form-control" placeholder="#" min="1" max="5" />
+        </form>
+    </div>
+    {% endif %}
+    {% endif %}
+    <pre></pre>
+    {% if rating > 0 %}
+    <form style="display: inline-block" id = "rating1" method="post" name="rating1">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="1">
+    <span class="fa fa-star checked" style="cursor:pointer" onclick="document.forms['rating1'].submit();"></span>
+    </form>
+    {% else %}
+    <form style="display: inline-block" id = "nrating1" method="post" name="rating1">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="1">
+    <span class="fa fa-star" style="cursor:pointer" onclick="document.forms['rating1'].submit();"></span>
+    </form>
+    {% endif %}
+
+{% if rating > 1 %}
+    <form style="display: inline-block" id = "rating2" method="post" name="rating2">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="2">
+    <span class="fa fa-star checked" style="cursor:pointer" onclick="document.forms['rating2'].submit();"></span>
+    </form>
+    {% else %}
+    <form style="display: inline-block" id = "nrating2" method="post" name="rating2">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="2">
+    <span class="fa fa-star" style="cursor:pointer" onclick="document.forms['rating2'].submit();"></span>
+    </form>
+    {% endif %}
+
+{% if rating > 2 %}
+    <form style="display: inline-block" id = "rating3" method="post" name="rating3">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="3">
+    <span class="fa fa-star checked" style="cursor:pointer" onclick="document.forms['rating3'].submit();"></span>
+    </form>
+    {% else %}
+    <form style="display: inline-block" id = "nrating3" method="post" name="rating3">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="3">
+    <span class="fa fa-star" style="cursor:pointer" onclick="document.forms['rating3'].submit();"></span>
+    </form>
+    {% endif %}
+
+{% if rating > 3 %}
+    <form style="display: inline-block" id = "rating4" method="post" name="rating4">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="4">
+    <span class="fa fa-star checked" style="cursor:pointer" onclick="document.forms['rating4'].submit();"></span>
+    </form>
+    {% else %}
+    <form style="display: inline-block" id = "nrating4" method="post" name="rating4">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="4">
+    <span class="fa fa-star" style="cursor:pointer" onclick="document.forms['rating4'].submit();"></span>
+    </form>
+    {% endif %}
+
+{% if rating > 4 %}
+    <form style="display: inline-block" id = "rating5" method="post" name="rating5">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="5">
+    <span class="fa fa-star checked" style="cursor:pointer" onclick="document.forms['rating5'].submit();"></span>
+    </form>
+    {% else %}
+    <form style="display: inline-block" id = "nrating5" method="post" name="rating5">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="5">
+    <span class="fa fa-star" style="cursor:pointer" onclick="document.forms['rating5'].submit();"></span>
+    </form>
+    {% endif %}
+
+{% if rating > 5 %}
+    <form style="display: inline-block" id = "rating6" method="post" name="rating6">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="6">
+    <span class="fa fa-star checked" style="cursor:pointer" onclick="document.forms['rating6'].submit();"></span>
+    </form>
+    {% else %}
+    <form style="display: inline-block" id = "nrating6" method="post" name="rating6">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="6">
+    <span class="fa fa-star" style="cursor:pointer" onclick="document.forms['rating6'].submit();"></span>
+    </form>
+    {% endif %}
+
+{% if rating > 6 %}
+    <form style="display: inline-block" id = "rating7" method="post" name="rating7">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="7">
+    <span class="fa fa-star checked" style="cursor:pointer" onclick="document.forms['rating7'].submit();"></span>
+    </form>
+    {% else %}
+    <form style="display: inline-block" id = "nrating7" method="post" name="rating7">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="7">
+    <span class="fa fa-star" style="cursor:pointer" onclick="document.forms['rating7'].submit();"></span>
+    </form>
+    {% endif %}
+
+{% if rating > 7 %}
+    <form style="display: inline-block" id = "rating8" method="post" name="rating8">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="8">
+    <span class="fa fa-star checked" style="cursor:pointer" onclick="document.forms['rating8'].submit();"></span>
+    </form>
+    {% else %}
+    <form style="display: inline-block" id = "nrating8" method="post" name="rating8">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="8">
+    <span class="fa fa-star" style="cursor:pointer" onclick="document.forms['rating8'].submit();"></span>
+    </form>
+    {% endif %}
+
+{% if rating > 8 %}
+    <form style="display: inline-block" id = "rating9" method="post" name="rating9">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="9">
+    <span class="fa fa-star checked" style="cursor:pointer" onclick="document.forms['rating9'].submit();"></span>
+    </form>
+    {% else %}
+    <form style="display: inline-block" id = "nrating9" method="post" name="rating9">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="9">
+    <span class="fa fa-star" style="cursor:pointer" onclick="document.forms['rating9'].submit();"></span>
+    </form>
+    {% endif %}
+
+{% if rating > 9 %}
+    <form style="display: inline-block" id = "rating10" method="post" name="rating10">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="10">
+    <span class="fa fa-star checked" style="cursor:pointer" onclick="document.forms['rating10'].submit();"></span>
+    </form>
+    {% else %}
+    <form style="display: inline-block" id = "nrating10" method="post" name="rating10">{% csrf_token %}
+        <input style="display:none" type="number" name="rating" value="10">
+    <span class="fa fa-star" style="cursor:pointer" onclick="document.forms['rating10'].submit();"></span>
+    </form>
+    {% endif %}
+    {% else %}
+    <div style="font-size:15px; padding-top:10px; color:#9AB"><p>Sign in or register to add a rating!</p></div>
+    {% endif %}
+</h1>
+    <div style="padding:0px 20px">
+    {% for genre in show.genres %}
+        <button style="color:white; border-radius:3px; display: inline-block; padding:5px 5px; text-align:center; background-color: #283038; border: none">{{ genre }}</button>
+        {% endfor %}
+    </div>
+<hr>
+<h5 style="color:#9ab; font-size:14px">
+<img style="float:left; padding:0px 14px" src={{show.image.original}} height="340" width="260">
+    {{show.summary}}</h5>
+
+    <script>
+        function show() {
+  var x = document.getElementById("hidden");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+  }
+    </script>
+</article>
+{% endblock content %}
