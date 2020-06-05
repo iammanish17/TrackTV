@@ -23,6 +23,7 @@
 <a href="?sort=4" class="btn btn-dark">Rating <span class="fa fa-sort-numeric-asc"></span></a>
 {% endif %}
 <pre></pre><pre></pre>
+{% if total %}
 <div style="color:white"><p>Viewing {{page_obj.start_index}}-{{page_obj.end_index}} out of {{total}} entries </p></div>
 {% for result in page_obj %}
         <article class="media content-section" style="background-color:#2c3440">
@@ -60,4 +61,7 @@
         <a class="btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}}">Next</a>
         <a class="btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages}}">Last</a>
       {% endif %}
+{% else %}
+<h4 style="color:#a8bdad">The user has not added any shows to their list!</h4>
+{% endif %}
 {% endblock content %}
