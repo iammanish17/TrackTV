@@ -1,0 +1,63 @@
+{% extends "tv/base.html" %}
+{% block content %}
+<pre></pre><pre></pre><pre></pre>
+<p style="font-size:30px; color:#9ab">Shows watched by <b>{{ username }}</b></p>
+{% if sort_type == 1 %}
+    <button type="button" class="btn btn-dark active">Recently Added <span class="fa fa-sort-amount-desc"></span></button>
+{% else %}
+<a href="?sort=1" class="btn btn-dark">Recently Added <span class="fa fa-sort-amount-desc"></span></a>
+{% endif %}
+{% if sort_type == 2 %}
+    <button type="button" class="btn btn-dark active">Recently Added <span class="fa fa-sort-amount-asc"></span></button>
+{% else %}
+<a href="?sort=2" class="btn btn-dark">Recently Added <span class="fa fa-sort-amount-asc"></span></a>
+{% endif %}
+{% if sort_type == 3 %}
+    <button type="button" class="btn btn-dark active">Rating <span class="fa fa-sort-numeric-desc"></span></button>
+{% else %}
+<a href="?sort=3" class="btn btn-dark">Rating <span class="fa fa-sort-numeric-desc"></span></a>
+{% endif %}
+{% if sort_type == 4 %}
+    <button type="button" class="btn btn-dark active">Rating <span class="fa fa-sort-numeric-asc"></span></button>
+{% else %}
+<a href="?sort=4" class="btn btn-dark">Rating <span class="fa fa-sort-numeric-asc"></span></a>
+{% endif %}
+<pre></pre><pre></pre>
+<div style="color:white"><p>Viewing {{page_obj.start_index}}-{{page_obj.end_index}} out of {{total}} entries </p></div>
+{% for result in page_obj %}
+        <article class="media content-section" style="background-color:#2c3440">
+          <div class="media">
+         <div class="media-left">
+             <a href="/show/{{ result.show.showid }}">
+        <img style="padding: 0px 4px" src= {{result.show.image}} class="media-object" width="60" height="85">
+             </a>
+    </div>
+    <div class="media-body">
+        <a href="/show/{{ result.show.showid }}"><h2 style="padding: 4px 4px; color:white" class="media-heading">{{ result.show.name }}</h2> </a>
+        <h4 style="display:inline-block; color:#ffa500"><span class="fa fa-star checked"></span></h4>
+        <h4 style="display:inline-block; color:#ffa500">{{result.rating}}/10</h4>
+        {% for genre in result.show.genres %}
+        <button style="color:white; border-radius:3px; display: inline-block; padding:12px 14px; text-align:center; background-color: #283038; border: none">{{ genre }}</button>
+        {% endfor %}
+    </div>
+  </div>
+        </article>
+    {% endfor %}
+    {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+{% endblock content %}

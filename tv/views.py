@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from .models import Show, UserRating
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 
 def home(request):
@@ -29,6 +30,36 @@ def search(request, query: str = ""):
             'query': query
         }
         return render(request, 'tv/search.html', context)
+
+
+def showlist(request, username: str = ""):
+    if not username:
+        return redirect('tv-home')
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return redirect('tv-home')
+    sort_type = request.GET.get('sort')
+    if not sort_type or not sort_type.isdigit():
+        sort_type = 1
+    sort_type = int(sort_type)
+    if sort_type == 2:
+        results = UserRating.objects.filter(user=user).order_by('pk')
+    elif sort_type == 3:
+        results = UserRating.objects.filter(user=user).order_by('-rating')
+    elif sort_type == 4:
+        results = UserRating.objects.filter(user=user).order_by('rating')
+    else:
+        results = UserRating.objects.filter(user=user).order_by('-pk')
+    paginator = Paginator(results, 25)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    for result in page_obj:
+        result.show.genres = result.show.genres.split(",")
+    return render(request, 'tv/list.html', {'username': username,
+                                            'page_obj': page_obj,
+                                            'total': paginator.count,
+                                            'sort_type': sort_type})
 
 
 def show(request, showid: int = 0):
