@@ -17,7 +17,7 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+    return render(request, 'users/register.html', {'form': form, 'title': 'Register'})
 
 
 def profile(request, username: str = ""):
@@ -50,6 +50,7 @@ def profile(request, username: str = ""):
 
     return render(request, 'users/profile.html',
                   {'username': username,
+                   'title': f"{username}'s Profile",
                    'recent': recent,
                    'top1': top[0],
                    'top2': top[1],

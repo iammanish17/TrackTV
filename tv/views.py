@@ -27,7 +27,8 @@ def search(request, query: str = ""):
                 each["show"]["image"] = {"original": "/static/tv/default.png"}
         context = {
             'results': resp,
-            'query': query
+            'query': query,
+            'title': "Search"
         }
         return render(request, 'tv/search.html', context)
 
@@ -57,6 +58,7 @@ def showlist(request, username: str = ""):
     for result in page_obj:
         result.show.genres = result.show.genres.split(",")
     return render(request, 'tv/list.html', {'username': username,
+                                            'title': f"{username}'s list",
                                             'page_obj': page_obj,
                                             'total': paginator.count,
                                             'sort_type': sort_type})
@@ -94,7 +96,8 @@ def show(request, showid: int = 0):
                 value = int(request.POST['rating'])
                 if value == 0:
                     UserRating.objects.get(show=sh, user=request.user).delete()
-                    return render(request, 'tv/show.html', {'show': resp, 'watched': False, 'rating': 0})
+                    return render(request, 'tv/show.html', {'show': resp, 'title': resp['name'], 
+                                                            'watched': False, 'rating': 0})
                 else:
                     try:
                         ur = UserRating.objects.get(show=sh, user=request.user)
@@ -102,7 +105,8 @@ def show(request, showid: int = 0):
                         ur = UserRating(show=sh, user=request.user)
                     ur.rating = value
                     ur.save()
-                    return render(request, 'tv/show.html', {'show': resp, 'watched': True, 'rating': value,
+                    return render(request, 'tv/show.html', {'show': resp, 'title': resp['name'],  'watched': True,
+                                                            'rating': value,
                                                             'position': ur.position})
             if "#" in request.POST:
                 try:
@@ -118,15 +122,17 @@ def show(request, showid: int = 0):
                 ur = UserRating.objects.get(show=sh, user=request.user)
                 ur.position = value
                 ur.save()
-                return render(request, 'tv/show.html', {'show': resp, 'watched': True, 'rating': ur.rating,
+                return render(request, 'tv/show.html', {'show': resp, 'title': resp['name'],  'watched': True,
+                                                        'rating': ur.rating,
                                                         'position': ur.position})
 
     if not request.user.is_authenticated:
-        return render(request, 'tv/show.html', {'show': resp, "watched": False, "rating": 0})
+        return render(request, 'tv/show.html', {'show': resp, 'title': resp['name'],  "watched": False, "rating": 0})
 
     try:
         ur = UserRating.objects.get(show=Show.objects.get(showid=showid), user=request.user)
-        return render(request, 'tv/show.html', {'show': resp, 'watched': True, 'rating': ur.rating,
+        return render(request, 'tv/show.html', {'show': resp, 'title': resp['name'],  'watched': True,
+                                                'rating': ur.rating,
                                                 'position': ur.position})
     except UserRating.DoesNotExist:
-        return render(request, 'tv/show.html', {'show': resp, "watched": False, "rating": 0})
+        return render(request, 'tv/show.html', {'show': resp, 'title': resp['name'],  "watched": False, "rating": 0})
