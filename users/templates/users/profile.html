@@ -1,9 +1,127 @@
 {% extends "tv/base.html" %}
-{% load crispy_forms_tags %}
 {% block content %}
-    {% if user %}
-        <h5 style="font-size:30px; color:#ffffff"> ok {{ user }}</h5>
+    <pre></pre><pre></pre><pre></pre>
+<p style="font-size:30px; color:#9ab">Profile for <b>{{username}}</b></p><pre></pre>
+<h1 style="color:white; font-size:20px">Statistics</h1><pre></pre>
+<div class="row overview">
+    <div class="container">
+  <div class="row" style="background-color:#1e1e1e">
+      <div class="col-8"><h4 style="color:#cecece">Total shows watched</h4></div>
+      <div class="col-4"><h4 style="color:#d7ded5">{{total}}</h4></div>
+  </div>
+        <div class="row" style="background-color:#3e3e3e">
+      <div class="col-8"><h4 style="color:#cecece">Average Rating</h4></div>
+      <div class="col-4"><h4 style="color:#d7ded5">{{average}}</h4></div>
+  </div>
+        <div class="row" style="background-color:#1e1e1e">
+      <div class="col-8"><h4 style="color:#cecece">Ongoing shows</h4></div>
+      <div class="col-4"><h4 style="color:#d7ded5">{{ongoing}}</h4></div>
+  </div>
+        <div class="row" style="background-color:#3e3e3e">
+      <div class="col-8"><h4 style="color:#cecece">Finished shows</h4></div>
+      <div class="col-4"><h4 style="color:#d7ded5">{{ended}}</h4></div>
+  </div>
+    </div>
+
+</div><pre></pre><pre></pre><pre></pre>
+<h1 style="color:white; font-size:20px">Favourite Shows</h1><pre></pre>
+
+<div class="card" style="width: 10rem; display:inline-block; background-color: #1e1e1e">
+    {% if top1 %}
+        <img class="card-img-top" src={{top1.image}}>
+        <div class="card-body">
+        <p class="card-title"><center><h6><a href="/show/{{top1.showid}}">{{top1.name}}</a></h6></center>
+        <p class="card-text"><center><h3 style="color:#cecece">#1</h3></center>
+        </div>
     {% else %}
-        <h5 style="font-size:30px; color:#ffffff">No account with that username exists!</h5>
+        <img class="card-img-top" src="/static/tv/default.png">
+        <div class="card-body">
+        <p class="card-title"><center><h6>No show added</h6></center>
+        <p class="card-text"><center><h3 style="color:#cecece">#1</h3></center>
+    </div>
     {% endif %}
+  </div>
+
+<div class="card" style="width: 10rem; display:inline-block; background-color: #1e1e1e">
+    {% if top2 %}
+        <img class="card-img-top" src={{top2.image}}>
+        <div class="card-body">
+        <p class="card-title"><center><h6><a href="/show/{{top2.showid}}">{{top2.name}}</a></h6></center>
+        <p class="card-text"><center><h3 style="color:#cecece">#2</h3></center>
+        </div>
+    {% else %}
+        <img class="card-img-top" src="/static/tv/default.png">
+        <div class="card-body">
+        <p class="card-title"><center><h6>No show added</h6></center>
+        <p class="card-text"><center><h3 style="color:#cecece">#2</h3></center>
+    </div>
+    {% endif %}
+  </div>
+
+<div class="card" style="width: 10rem; display:inline-block; background-color: #1e1e1e">
+    {% if top3 %}
+        <img class="card-img-top" src={{top3.image}}>
+        <div class="card-body">
+        <p class="card-title"><center><h6><a href="/show/{{top3.showid}}">{{top3.name}}</a></h6></center>
+        <p class="card-text"><center><h3 style="color:#cecece">#3</h3></center>
+        </div>
+    {% else %}
+        <img class="card-img-top" src="/static/tv/default.png">
+        <div class="card-body">
+        <p class="card-title"><center><h6>No show added</h6></center>
+        <p class="card-text"><center><h3 style="color:#cecece">#3</h3></center>
+    </div>
+    {% endif %}
+  </div>
+
+<div class="card" style="width: 10rem; display:inline-block; background-color: #1e1e1e">
+    {% if top4 %}
+        <img class="card-img-top" src={{top4.image}}>
+        <div class="card-body">
+        <p class="card-title"><center><h6><a href="/show/{{top4.showid}}">{{top4.name}}</a></h6></center>
+        <p class="card-text"><center><h3 style="color:#cecece">#4</h3></center>
+        </div>
+    {% else %}
+        <img class="card-img-top" src="/static/tv/default.png">
+        <div class="card-body">
+        <p class="card-title"><center><h6>No show added</h6></center>
+        <p class="card-text"><center><h3 style="color:#cecece">#4</h3></center>
+    </div>
+    {% endif %}
+  </div>
+
+<div class="card" style="width: 10rem; display:inline-block; background-color: #1e1e1e">
+    {% if top5 %}
+        <img class="card-img-top" src={{top5.image}}>
+        <div class="card-body">
+        <p class="card-title"><center><h6><a href="/show/{{top5.showid}}">{{top5.name}}</a></h6></center>
+        <p class="card-text"><center><h3 style="color:#cecece">#5</h3></center>
+        </div>
+    {% else %}
+        <img class="card-img-top" src="/static/tv/default.png">
+        <div class="card-body">
+        <p class="card-title"><center><h6>No show added</h6></center>
+        <p class="card-text"><center><h3 style="color:#cecece">#5</h3></center>
+    </div>
+    {% endif %}
+  </div>
+
+<pre></pre><pre></pre><pre></pre>
+<h1 style="color:white; font-size:20px">Recently Watched</h1><pre></pre>
+{% for ur in recent %}
+<div class="card" style="width: 10rem; display:inline-block; background-color: #1e1e1e">
+        <img class="card-img-top" src={{ur.show.image}}>
+        <div class="card-body">
+        <p class="card-title"><center><h6><a href="/show/{{ur.show.showid}}">{{ur.show.name}}</a></h6></center>
+        <p class="card-text"><center><h3 style="color:#ffa500"><span class="fa fa-star checked"></span>
+            {{ur.rating}}/10</h3></center>
+        </div>
+  </div>
+{% endfor %}
+<pre></pre><pre></pre>
+{% if total %}
+<h5 style="color:white; padding:-3px"><a href="/list/{{username}}">See all {{total}} ratings <span class="fa fa-angle-double-right"></span></a></h5>
+{% endif %}
+<pre></pre><pre></pre><pre></pre>
+
 {% endblock content %}

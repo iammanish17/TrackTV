@@ -46,7 +46,7 @@
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
                     <a class="nav-item nav-link" href="/list/{{user.username}}">My List</a>
-                    <a class="nav-item nav-link" href="/profile/">My Profile</a>
+                    <a class="nav-item nav-link" href="/profile/{{user.username}}">My Profile</a>
                     <a class="nav-item nav-link" href="/logout/">Logout</a>
                 {% else %}
                     <a class="nav-item nav-link" href="/login/">Login</a>
