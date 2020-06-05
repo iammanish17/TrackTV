@@ -1,28 +1,28 @@
 {% extends "tv/base.html" %}
 {% block content %}
 {% if results %}
-<p style="font-size:30px; color:#9ab">Results for <b>{{ query }}</b></p>
+<p style="font-size:30px; color:#9ab">Results for <b>{{query}}</b></p>
     {% for result in results %}
         <article class="media content-section" style="background-color:#2c3440">
           <div class="media">
          <div class="media-left">
-             <a href="/show/{{ result.show.id }}">
-        <img style="padding: 0px 4px" src= {{ result.show.image.original }} class="media-object" width="180" height="240">
+             <a href="/show/{{result.show.id}}">
+        <img style="padding: 0px 4px" src= {{result.show.image.original}} class="media-object" width="180" height="240">
              </a>
     </div>
     <div class="media-body">
-        <a href="/show/{{ result.show.id }}"><h2 style="padding: 4px 4px; color:white" class="media-heading">{{ result.show.name }}</h2> </a>
+        <a href="/show/{{result.show.id}}"><h2 style="padding: 4px 4px; color:white" class="media-heading">{{result.show.name}}</h2> </a>
         {% for genre in result.show.genres %}
-        <button style="color:white; border-radius:3px; display: inline-block; padding:12px 14px; text-align:center; background-color: #283038; border: none">{{ genre }}</button>
+        <button style="color:white; border-radius:3px; display: inline-block; padding:12px 14px; text-align:center; background-color: #283038; border: none">{{genre}}</button>
         {% endfor %}
-        <p style="padding: 12px 5px; color:#9ab;"> {{ result.show.summary }}</p>
+        <p style="padding: 12px 5px; color:#9ab;"> {{result.show.summary}}</p>
     </div>
   </div>
         </article>
     {% endfor %}
 {% else %}
 {% if query %}
-<p style="font-size:30px">Could not find any results for <b>{{ query }}</b>! :(</p>
+<p style="font-size:30px">Could not find any results for <b>{{query}}</b>! :(</p>
 {% endif %}
 {% endif %}
 
