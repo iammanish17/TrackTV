@@ -1,4 +1,18 @@
 {% extends "tv/base.html" %}
 {% block content %}
-<h1> Home!</h1>
+<p style="font-size:30px; color:#9ab">Home</p><pre></pre>
+<h1 style="color:white; font-size:20px">Popular shows right now</h1><pre></pre>
+{% for show in shows %}
+<div class="card" style="width: 10rem; display:inline-block; background-color: #1e1e1e">
+        <img class="card-img-top" src={{show.image}}>
+        <div class="card-body">
+        <p class="card-title"><center><h6><a href="/show/{{show.showid}}">{{show.name}}</a></h6></center>
+        </div>
+  </div>
+{% endfor %}
+<pre></pre>
+{% if not user.is_authenticated %}
+<div style="font-size:15px; padding-top:10px; color:#9AB"><p><a href="/login">Sign in</a>
+    or <a href="/register">register</a> to add shows to your list!</p></div>
+{% endif %}
 {% endblock content %}

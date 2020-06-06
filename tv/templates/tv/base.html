@@ -24,6 +24,7 @@
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
           <a class="navbar-brand mr-4" href="{% url 'tv-home' %}">TrackTV</a>
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
@@ -45,10 +46,12 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="/about/">About</a>
                     <a class="nav-item nav-link" href="/list/{{user.username}}">My List</a>
                     <a class="nav-item nav-link" href="/profile/{{user.username}}">My Profile</a>
                     <a class="nav-item nav-link" href="/logout/">Logout</a>
                 {% else %}
+                    <a class="nav-item nav-link" href="/about/">About</a>
                     <a class="nav-item nav-link" href="/login/">Login</a>
                     <a class="nav-item nav-link" href="/register/">Register</a>
                 {% endif %}
@@ -57,6 +60,7 @@
         </div>
       </nav>
     </header>
+
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
@@ -79,4 +83,5 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
+
 </html>
