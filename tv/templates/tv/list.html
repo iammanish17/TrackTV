@@ -1,7 +1,7 @@
 {% extends "tv/base.html" %}
 {% block content %}
 <pre></pre><pre></pre><pre></pre>
-<p style="font-size:30px; color:#9ab">Shows watched by <b>{{username}}</b></p>
+<p style="font-size:30px; color:#9ab">Shows watched by <a href="/profile/{{username}}"><b>{{username}}</b></a></p>
 {% if sort_type == 1 %}
     <button type="button" class="btn btn-dark active">Recently Added <span class="fa fa-sort-amount-desc"></span></button>
 {% else %}
